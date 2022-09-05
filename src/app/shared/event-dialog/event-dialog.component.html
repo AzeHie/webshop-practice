@@ -1,0 +1,7 @@
+<h1 *ngIf="!data.firstname" mat-dialog-title>{{ data.message }}</h1>
+<h1 *ngIf="data.firstname" mat-dialog-title>
+  {{ data.message }} {{ data.firstname }}!
+</h1>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>OK</button>
+</div>
