@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW": "azesshopmongodb",
+    "JWT_KEY": "Secret_this_should_be_longer"
+  }
+}
