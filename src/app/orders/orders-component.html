@@ -1,0 +1,91 @@
+<div class="pageContainer">
+  <div class="nav-bar">
+    <div class="nav-items">
+      <button
+        class="navBtnCurrent"
+        routerLink="/orders/order"
+        matTooltip="Cart"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/cart.png" />
+      </button>
+      <button
+        class="navBtnUpcoming"
+        routerLink="/orders/delivery"
+        matTooltip="Address"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/contactdetails.png" />
+      </button>
+      <button
+        [disabled]="true"
+        class="navBtnUpcoming"
+        routerLink="/orders/shipping"
+        matTooltip="Shipping method"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/deliveryaddress.png" />
+      </button>
+      <button
+        [disabled]="true"
+        class="navBtnUpcoming"
+        routerLink="/orders/payment"
+        matTooltip="Payment"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/paymentmethod.png" />
+      </button>
+      <button
+        [disabled]="true"
+        class="navBtnUpcoming"
+        routerLink="/orders/review"
+        matTooltip="Order review"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/orderarrow.png" />
+      </button>
+    </div>
+  </div>
+  <div *ngIf="current==='cartSummary'">
+    <div class="cartSummaryTitle">
+      <h3>Cart confirmation</h3>
+    </div>
+    <div class="summaryContainer">
+      <div *ngFor="let item of cartItemList;">
+        <div class="product">
+          <img class="productImg" src="{{ item.imagePath }}" />
+          <span class="title">{{ item.title }}</span>
+          <span class="price">{{ item.price }}€</span>
+          <div class="deleteAndAmount">
+            <span>
+              <button class="deleteButton" (click)="onRemoveOne(item)">
+                <img class="deleteImg" src="../../assets/images/minus.png" />
+              </button>
+              <span class="amount">{{ item.amount }}</span>
+              <button class="deleteButton" (click)="onAddOne(item)">
+                <img class="deleteImg" src="../../assets/images/plus.png" />
+              </button>
+            </span>
+            <button class="deleteButton" (click)="onRemove(item)">
+              <img class="deleteImg" src="../../assets/images/delete1.png" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="totalsContainer">
+        <span class="totalPrice"
+          >Total price <b class="grandTotal">{{ grandTotal }}€</b></span
+        >
+        <span class="itemsAmount">Total of {{ itemsAmount }} items</span>
+        <div class="buttons">
+          <button mat-button class="backBtn" routerLink="/cart">
+            Back to cart
+          </button>
+          <button mat-button class="continueBtn" (click)="onNavigation()">
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
