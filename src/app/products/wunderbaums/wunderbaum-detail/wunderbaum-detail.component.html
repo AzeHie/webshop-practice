@@ -1,0 +1,42 @@
+<mat-card class="flex-card-container">
+  <div class="flex-title-group">
+    <button mat-button class="backButton" (click)="backToProducts()">
+      <img
+        class="backarrowImg"
+        src="../../../assets/images/backbutton.png"
+        matTooltip="Back to products"
+        matTooltipPosition="below"
+      />
+    </button>
+    <span class="title">{{ wunderbaum?.title }}</span>
+    <div class="edit-and-delete">
+      <button class="backButton" (click)="onEdit()">
+        <img
+          class="editImg"
+          src="../../../assets/images/editblack.png"
+          matTooltip="Edit product"
+          matTooltipPosition="below"
+        />
+      </button>
+      <button class="backButton" (click)="onDelete()">
+        <img
+          class="editImg"
+          src="../../../assets/images/delete1.png"
+          matTooltip="Delete product"
+          matTooltipPosition="below"
+        />
+      </button>
+    </div>
+  </div>
+  <div class="ngxImageZoomContainer">
+    <lib-ngx-image-zoom
+      zoomMode="click"
+      [thumbImage]="productImage"
+    ></lib-ngx-image-zoom>
+  </div>
+  <span class="description">{{ wunderbaum?.description }}</span>
+  <span class="price">{{ wunderbaum?.price }}€</span>
+  <button mat-button class="cartButton" (click)="onAddToCart(wunderbaum)">
+    Add to cart
+  </button>
+</mat-card>

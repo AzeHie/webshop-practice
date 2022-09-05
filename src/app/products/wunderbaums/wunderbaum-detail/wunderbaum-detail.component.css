@@ -1,0 +1,88 @@
+mat-card {
+  background-color: white;
+  color: black;
+  width: 60vw;
+}
+
+.flex-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flex-title-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.edit-and-delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.title {
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 24px;
+  text-align: center;
+  flex-shrink: 1;
+}
+
+.description {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  font-style: italic;
+  flex-shrink: 1;
+}
+
+.price {
+  padding-bottom: 20px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
+  flex-shrink: 1;
+}
+
+.cartButton {
+  width: 40%;
+  align-self: center;
+  background-color: rgb(235, 209, 234);
+  transition: background 600ms ease;
+  flex-shrink: 2;
+}
+
+.cartButton:hover {
+  background-color: rgb(203, 158, 201);
+}
+
+::ng-deep .ngxImageZoomContainer > img {
+  padding-left: auto;
+  padding-right: auto;
+  height: 300px;
+  width: auto;
+  margin: auto;
+  flex-shrink: 3;
+  cursor: zoom-in;
+}
+
+.backButton {
+  background-color: none;
+  border: none;
+  background: none;
+}
+
+.backarrowImg {
+  width: 20px;
+  height: auto;
+}
+
+.editImg {
+  width: 20px;
+  height: auto;
+}
