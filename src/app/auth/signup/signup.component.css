@@ -1,0 +1,52 @@
+mat-card {
+  background-color: rgb(172, 172, 172);
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.grid-login-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  width: 60vw;
+}
+
+mat-form-field {
+  margin: 5px;
+}
+
+.address {
+  grid-column: 1 / span 2;
+}
+
+::ng-deep .mat-form-field-label {
+  color: black !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: black !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: rgb(158, 66, 157)  !important;
+ }
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: rgb(158, 66, 157) !important;;
+}
+
+.loginButton {
+  background-color: rgb(228, 89, 224);
+  text-align: center;
+  width: 30%;
+  margin-top: 10px;
+}
+
+.loginButton:disabled {
+  background-color: rgb(219, 137, 217);
+  cursor: not-allowed;
+}

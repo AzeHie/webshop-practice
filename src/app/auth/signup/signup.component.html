@@ -1,0 +1,114 @@
+<app-loading-spinner *ngIf="isloading"></app-loading-spinner>
+<mat-card *ngIf="!isloading">
+  <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
+    <div class="grid-login-container">
+      <mat-form-field>
+        <input
+          matInput
+          name="firstname"
+          ngModel
+          type="text"
+          placeholder="Firstname"
+          #firstnameInput="ngModel"
+          required
+        />
+        <mat-error *ngIf="firstnameInput.invalid"
+          >Please enter a firstname</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="lastname"
+          ngModel
+          type="text"
+          placeholder="Lastname"
+          #lastnameInput="ngModel"
+          required
+        />
+        <mat-error *ngIf="lastnameInput.invalid"
+          >Please enter a lastname</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="address">
+        <input
+          matInput
+          name="address"
+          ngModel
+          type="text"
+          placeholder="Address"
+          #addressInput="ngModel"
+          required
+        />
+        <mat-error *ngIf="addressInput.invalid"
+          >Please enter a valid address</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="postcode"
+          ngModel
+          type="text"
+          placeholder="Post code"
+          #postcodeInput="ngModel"
+          required
+          pattern="^[1-9]+[0-9]*$"
+        />
+        <mat-error *ngIf="postcodeInput.invalid"
+          >Please enter a valid postcode</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="city"
+          ngModel
+          type="text"
+          placeholder="City"
+          #postcodeInput="ngModel"
+          required
+        />
+        <mat-error *ngIf="postcodeInput.invalid">Please enter a city</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="email"
+          ngModel
+          type="email"
+          placeholder="Email"
+          #emailInput="ngModel"
+          required
+          email
+        />
+        <mat-error *ngIf="emailInput.invalid"
+          >Please enter a valid email</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="password"
+          ngModel
+          type="password"
+          placeholder="Password"
+          #passwordInput="ngModel"
+          required
+          min-lenght="5"
+        />
+        <mat-error *ngIf="passwordInput.invalid"
+          >Please choose a password, minium length of 5 characters!</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <button
+      mat-raised-button
+      type="submit"
+      class="loginButton"
+      [disabled]="!signupForm.valid"
+    >
+      Signup
+    </button>
+  </form>
+</mat-card>
