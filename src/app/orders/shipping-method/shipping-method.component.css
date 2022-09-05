@@ -1,0 +1,157 @@
+.pageContainer {
+  width: 98vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVIGATION BAR */
+
+.nav-bar {
+  width: 100%;
+  border-bottom: 1px solid rgb(179, 179, 179);
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.nav-items {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.navBtnPervious, .navBtnCurrent, .navBtnUpcoming {
+  padding: 15px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: none;
+}
+
+.navBtnPervious {
+  background-color: rgb(131, 255, 187);
+}
+
+.navBtnCurrent {
+  background-color: rgb(164, 120, 184);
+}
+
+.navBtnUpcoming {
+  background-color: rgb(179, 179, 179);
+}
+
+.navBtnUpcoming:disabled {
+  cursor: not-allowed;
+}
+
+.active {
+  background-color: rgb(164, 120, 184);
+}
+
+.navImg {
+  width: 30px;
+  height: auto;
+}
+
+
+/* PAGE */
+
+h3 {
+  width: 80%;
+  margin: auto;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  background-color: rgb(240, 240, 240);
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 1%;
+}
+
+mat-radio-group {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  align-content: center;
+  background-color: rgb(231, 231, 231);
+  padding: 10px;
+}
+
+::ng-deep .mat-radio-outer-circle {
+  border-color: black !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+   background-color: #422873 !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-inner-circle {
+  background-color: #422873 !important;
+}
+
+.shippingMethod1, .shippingMethod2, .shippingMethod3 {
+  display: grid;
+  grid-template-columns: 90% auto;
+  grid-template-rows: auto;
+  padding: 10px 5px;
+}
+
+.shippingPrice {
+  font-size: 20px;
+}
+
+.price {
+  justify-self: end;
+}
+
+i {
+  font-size: 14px;
+}
+
+span {
+  margin-left: 10px;
+}
+
+.companyImg {
+  height: 25px;
+  width: auto;
+  margin-bottom: 2px;
+}
+
+
+/* BUTTONS */
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+
+.backBtn {
+  border: none;
+  background-color: rgb(235, 209, 234);
+  transition: background 600ms ease;
+  margin: 5px;
+  min-width: 150px;
+}
+
+.continueBtn {
+  align-self: flex-end;
+  border: none;
+  background-color: rgb(235, 209, 234);
+  transition: background 600ms ease;
+  margin: 5px;
+  min-width: 150px;
+}
+
+.continueBtn:disabled {
+  cursor: not-allowed;
+}
+
+
+.continueBtn:hover:not(:disabled), .backBtn:hover {
+  background-color: rgb(203, 158, 201);
+}
