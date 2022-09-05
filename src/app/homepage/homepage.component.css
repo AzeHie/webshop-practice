@@ -1,0 +1,156 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.productCats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cats {
+  cursor:pointer;
+}
+
+.cats:hover {
+  color: rgb(218, 59, 212);
+}
+
+.text {
+  text-align: center;
+}
+
+.wunderbaums {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.clothes {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.accessories {
+  width: 100%;
+  height: auto;
+}
+
+mat-card {
+  background-color: rgb(255, 255, 255);
+  height: 200px;
+  width: 150px;
+  margin: 2px;
+  color: black;
+  overflow: hidden;
+}
+
+.flex-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.headers {
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+  border-top: 1px solid rgb(134, 134, 134);
+  margin-top: 10px;
+}
+
+.headers > h3 {
+  padding-top: 10px;
+}
+
+.title {
+  text-align: center;
+  white-space: initial;
+  display: inline-block;
+  text-overflow: ellipsis;
+  color: black;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.price {
+  text-align: center;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 20px;
+  color: black;
+}
+
+
+/* IMAGES */
+
+.productImg {
+  height: 100px;
+  width: auto;
+  margin: auto;
+  padding: 2px;
+}
+
+.catsImg1 {
+  width: 150px;
+  height: auto;
+}
+
+.catsImg2 {
+  width: 200px;
+  height: auto;
+}
+
+.catsImg3 {
+  width: auto;
+  height: 200px;
+  margin-top: 10px;
+}
+
+.catsImg4 {
+  width: 200px;
+  height: auto;
+}
+
+.img1, .img2, .img3, .img4 {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px solid black;
+  overflow: hidden;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 0 10px;
+  background-color: white;
+}
+
+.img2 {
+  background-color: rgb(123, 99, 134);
+  border: none;
+}
+
+.img3 {
+  background-color: rgb(73, 86, 73);
+  border: none;
+}
+
+.img4 {
+  background-color: rgb(96, 90, 15);
+  border: none;
+}

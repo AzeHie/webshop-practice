@@ -1,0 +1,59 @@
+<div class="page-container">
+  <div class="productCats">
+    <div class="cats" routerLink="/products/wunderbaums">
+      <div class="img1">
+        <img class="catsImg1" src="../../assets/images/blackwunderbaum.png" />
+      </div>
+      <p class="text">Wunderbaums</p>
+    </div>
+    <div class="cats" routerLink="/products/clothes">
+      <div class="img2">
+        <img class="catsImg2" src="../../assets/images/forkids1.png" />
+      </div>
+      <p class="text">Clothes</p>
+    </div>
+    <div class="cats" routerLink="/products/accessories">
+      <div class="img3">
+        <img class="catsImg3" src="../../assets/images/greenhat.png" />
+      </div>
+      <p class="text">Accessories</p>
+    </div>
+    <div class="cats" routerLink="/products/giftcards">
+      <div class="img4">
+        <img class="catsImg4" src="../../assets/images/gift.png" />
+      </div>
+      <p class="text">Gift cards</p>
+    </div>
+  </div>
+  <div class="wunderbaums">
+    <div class="headers">
+      <h3>Most popular wunderbaums right now</h3>
+    </div>
+    <div *ngFor="let wunderbaum of wunderbaums | slice: 0:7; let i = index">
+      <mat-card
+        class="flex-card-container"
+        routerLink="/products/wunderbaums/{{ wunderbaum.productId }}"
+      >
+        <img class="productImg" src="{{ wunderbaum.imagePath }}" />
+        <p class="title">{{ wunderbaum.title }}</p>
+        <p class="price">{{ wunderbaum.price }}€</p>
+      </mat-card>
+    </div>
+  </div>
+  <div class="clothes">
+    <div class="headers">
+      <h3>Hottest clothes this summer</h3>
+    </div>
+    <div *ngFor="let cloth of clothes | slice: 0:7; let i = index">
+      <mat-card
+        class="flex-card-container"
+        routerLink="/products/clothes/{{ cloth.productId }}"
+      >
+        <img class="productImg" src="{{ cloth.imagePath }}" />
+        <p class="title">{{ cloth.title }}</p>
+        <p class="price">{{ cloth.price }}€</p>
+      </mat-card>
+    </div>
+  </div>
+  <div class="accessories"></div>
+</div>
