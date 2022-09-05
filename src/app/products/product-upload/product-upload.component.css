@@ -1,0 +1,109 @@
+mat-card {
+  background-color: rgb(223, 223, 223);
+}
+
+.flex-upload-container {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+
+.flex-radio-group {
+  display: flex;
+  flex-direction: column;
+  color: black;
+}
+
+input, textarea {
+  color: rgb(158, 66, 157) !important;
+  font-size: larger;
+}
+
+/* FORM */
+
+mat-form-field {
+  width: 90%;
+}
+
+::ng-deep .mat-form-field-label {
+  color: black !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: black !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: rgb(158, 66, 157)  !important;
+}
+
+/* RADIO BUTTONS */
+
+mat-radio-button {
+  margin: 5px;
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color:rgb(50, 162, 74);
+}
+
+::ng-deep.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  color:rgb(50, 162, 74);
+  background-color:rgb(50, 162, 74);
+}
+
+::ng-deep.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color:rgb(50, 162, 74);
+}
+
+
+/* IMAGES */
+
+.image-preview {
+  height: 150px;
+  margin: 15px 0;
+}
+
+.image-preview img {
+  height: 100%;
+}
+
+.image-upload-button {
+  margin: 10px 0;
+  background-color: rgb(187, 187, 187);
+  color: black;
+}
+
+.image-upload-button:hover {
+  background-color: rgb(187, 187, 187);
+}
+
+
+/* BUTTONS */
+
+.buttons {
+  background-color: rgb(203, 158, 201);
+  transition: background 600ms ease;
+  width: 20%;
+  margin: 10px 1px;
+}
+
+.buttons:disabled {
+  background-color: rgb(235, 209, 234);
+  cursor: not-allowed;
+}
+
+.buttons:disabled:hover {
+  background-color: rgb(235, 209, 234);
+  cursor: not-allowed;
+}
+
+.buttons:hover {
+  background-color: rgb(163, 101, 160);
+}
+
+.flex-buttons {
+  display: flex;
+  flex-direction: row;
+}
