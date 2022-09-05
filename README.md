@@ -1,6 +1,8 @@
 # webshop-practice
 Learning angular / nodeJS / mongoDB
 
-FILES UPLOADED AFTERWARDS, WHEN PROJECT WERE "READY" (SOME PARTS MISSING LIKE ACCESSORIES AND GIFT CARDS ETC, BUT I CONTINUED LEARNING ELSEWHERE)
-
 This is my first time with GitHub, not sure everything done as expected..
+
+Files uploaded afterwards, when project was "ready". Some parts missing, like accessories and gift cards etc, but I continued forward to learn other technologies (react)
+
+There is some pointless code duplications, I wanted to do some things couple times for better practice and didn't clean all the code after that
