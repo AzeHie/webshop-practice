@@ -1,0 +1,20 @@
+<div class="flex-page-container">
+  <div class="orderChange">
+    <div class="orderItems">
+      <button class="orderButton">
+        Change order
+        <img class="orderImg" src="../../assets/images/orderbutton.png" />
+      </button>
+      <div class="orderOptions">
+        <span (click)="orderByPrice()">Order by price</span>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let wunderbaum of wunderbaums">
+    <mat-card class="flex-card-container" [routerLink]="[wunderbaum.productId]">
+      <img class="productImg" src="{{ wunderbaum.imagePath }}" />
+      <p class="title">{{ wunderbaum.title }}</p>
+      <p class="price">{{ wunderbaum.price }}€</p>
+    </mat-card>
+  </div>
+</div>
