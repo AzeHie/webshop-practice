@@ -1,0 +1,44 @@
+.footer-container {
+  text-align: center;
+  background-color: rgb(164, 120, 184);
+  color: black;
+  position: absolute;
+  height: auto;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemsInCart {
+  background-color: purple;
+  color: white;
+  border-radius: 10px;
+  margin-left: -10px;
+  padding: 5px;
+}
+
+img {
+  width: 64px;
+  height: 64px;
+}
+
+span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+li {
+  text-align: left;
+  margin-bottom: -5px;
+}
+
+.logo {
+  margin-right: 32px;
+}
+
+.navi-button:hover {
+  background-color: rgb(173, 143, 187);
+  color: black;
+}

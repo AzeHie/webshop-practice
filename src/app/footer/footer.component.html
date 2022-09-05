@@ -1,0 +1,47 @@
+<div class="footer-container">
+  <div>
+    <ul>
+      <li>
+        <a mat-button class="navi-button" routerLink="/">Home</a>
+      </li>
+      <li>
+        <a mat-button class="navi-button" routerLink="/products/clothes"
+          >Clothes</a
+        >
+      </li>
+      <li>
+        <a mat-button class="navi-button" routerLink="/products/accessories"
+          >Accessories</a
+        >
+      </li>
+      <li>
+        <a mat-button class="navi-button" routerLink="/products/wunderbaums"
+          >Wunderbaums</a
+        >
+      </li>
+      <li>
+        <a mat-button class="navi-button" routerLing="/products/giftCards"
+          >Gift cards</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div>
+    <span>Contact us:</span><br />
+    <br />
+    <span>Email: info@azesshop.com</span><br />
+    <span>Phone: 045 123 123</span><br />
+    <span>2022 - All rights reserved</span>
+  </div>
+  <div class="cartIcon">
+    <a
+      mat-button
+      class="navi-button"
+      routerLink="/cart"
+      routerLinkActive="active"
+    >
+      <img class="cartImage" src="../../assets/images/cart.png" />
+      <span class="itemsInCart" *ngIf="itemsInCart > 0">{{ itemsInCart }}</span>
+    </a>
+  </div>
+</div>
