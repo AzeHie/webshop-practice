@@ -1,0 +1,115 @@
+<div class="pageContainer">
+  <div class="nav-bar">
+    <div class="nav-items">
+      <button
+        class="navBtnPervious"
+        routerLink="/orders/order"
+        matTooltip="Cart"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/cart.png" />
+      </button>
+      <button
+        class="navBtnPervious"
+        routerLink="/orders/delivery"
+        matTooltip="Address"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/contactdetails.png" />
+      </button>
+      <button
+        class="navBtnPervious"
+        routerLink="/orders/shipping"
+        matTooltip="Shipping method"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/deliveryaddress.png" />
+      </button>
+      <button
+        class="navBtnPervious"
+        routerLink="/orders/payment"
+        matTooltip="Payment"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/paymentmethod.png" />
+      </button>
+      <button
+        class="navBtnCurrent"
+        routerLink="/orders/review"
+        matTooltip="Order review"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/orderarrow.png" />
+      </button>
+    </div>
+  </div>
+  <h3>Order review</h3>
+  <div class="container">
+    <h5 class="customerHeader">Customer:</h5>
+    <div class="customer">
+      <div class="firstname">
+        <label>Firstname:</label>
+        <span>{{ customer?.firstname }}</span>
+      </div>
+      <div class="lastname">
+        <label>Lastname:</label>
+        <span>{{ customer?.lastname }}</span>
+      </div>
+    </div>
+    <h5 class="headers">Shipping address:</h5>
+    <div class="address">
+      <div class="streetAddress">
+        <label>Street address:</label>
+        <span>{{ customer?.address }}</span>
+      </div>
+      <div class="postcode">
+        <label>Postcode:</label>
+        <span>{{ customer?.postcode }}</span>
+      </div>
+      <div class="city">
+        <label>City:</label>
+        <span>{{ customer?.city }}</span>
+      </div>
+    </div>
+    <h5 class="headers">Ordered products:</h5>
+    <div class="orderedProducts">
+      <span style="margin-left: 4px">Product:</span>
+      <span style="justify-self: start">amount:</span>
+      <span style="justify-self: end; margin-right: 2px">Total price:</span>
+    </div>
+    <div class="cartItems">
+      <div class="itemInfo" *ngFor="let item of products; let i = index">
+        <div class="itemTitle">
+          <span>{{ item.title }}</span>
+          <span class="itemAmount"
+            >{{ item.amount }}
+            <span class="aPrice"
+              >(x <i>{{ calcSinglePrice(i) }}€)</i></span
+            ></span
+          >
+          <span class="itemPrice">{{ item.price }}€</span>
+        </div>
+      </div>
+      <div class="totalPrice">
+        <span>Total price:</span>
+        <span>{{ totalPrice }}€</span>
+      </div>
+    </div>
+    <h5 class="headers">Shipping company:</h5>
+    <div class="shipping">
+      <span>{{ shipping }}</span>
+    </div>
+    <h5 class="headers">Payment method:</h5>
+    <div class="payment">
+      <span>{{ payment }}</span>
+    </div>
+    <div class="buttons">
+      <button mat-button class="backBtn" (click)="onPrevious()">
+        Previous page
+      </button>
+      <button mat-button class="continueBtn" (click)="onSendOrder()">
+        Confirm the order and proceed to payment
+      </button>
+    </div>
+  </div>
+</div>
