@@ -1,0 +1,116 @@
+<mat-toolbar>
+  <span class="logo"
+    ><a mat-button class="navi-button" routerLink="/"
+      ><img src="../../assets/images/shoplogo.png" /></a
+  ></span>
+  <div class="dropdown">
+    <button class="menuButton">
+      <a><img src="../../assets/images/menu.png" /></a>
+    </button>
+    <div class="dropdown-content">
+      <a routerLink="/contact">Contact</a>
+      <a routerLink="/about">About us</a>
+    </div>
+  </div>
+  <ul>
+    <li>
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/products/clothes"
+        routerLinkActive="active"
+        >Clothes</a
+      >
+    </li>
+    <li>
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/products/accessories"
+        routerLinkActive="active"
+        >Accessories</a
+      >
+    </li>
+    <li>
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/products/wunderbaums"
+        routerLinkActive="active"
+        >Wunderbaums</a
+      >
+    </li>
+    <li>
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/products/giftcards"
+        routerLinkActive="active"
+        >Gift cards</a
+      >
+    </li>
+  </ul>
+  <span class="spacer"></span>
+  <ul>
+    <li *ngIf="userAdmin">
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/products/upload"
+        routerLinkActive="active"
+        >Product upload</a
+      >
+    </li>
+    <li *ngIf="userAuthed">
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/profile"
+        routerLinkActive="active"
+        ><img class="profileImg" src="../../assets/images/profile.png" />
+        {{ userFirstname | uppercase }}</a
+      >
+    </li>
+    <li *ngIf="!userAuthed">
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/login"
+        routerLinkActive="active"
+        >Login</a
+      >
+    </li>
+    <li *ngIf="!userAuthed">
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/signup"
+        routerLinkActive="active"
+        >Signup</a
+      >
+    </li>
+    <li *ngIf="userAuthed">
+      <a mat-button class="navi-button" (click)="onLogout()"
+        ><img
+          src="../../assets/images/logout.png"
+          matTooltip="Logout"
+          matTooltipPosition="below"
+      /></a>
+    </li>
+    <li>
+      <a
+        mat-button
+        class="navi-button"
+        routerLink="/cart"
+        routerLinkActive="active"
+        matTooltip="Shopping cart"
+        matTooltipPosition="below"
+      >
+        <img class="cartImage" src="../../assets/images/cart.png" />
+        <span class="itemsInCart" *ngIf="itemsInCart > 0">{{
+          itemsInCart
+        }}</span>
+      </a>
+    </li>
+  </ul>
+</mat-toolbar>
