@@ -1,0 +1,46 @@
+<app-loading-spinner *ngIf="isloading"></app-loading-spinner>
+<mat-card *ngIf="!isloading">
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+    <div class="flex-login-container">
+      <mat-form-field>
+        <input
+          class="inputti"
+          matInput
+          name="email"
+          ngModel
+          type="email"
+          placeholder="Email"
+          #emailInput="ngModel"
+          required
+          email
+        />
+        <mat-error *ngIf="emailInput.invalid"
+          >Please enter a valid email</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          name="password"
+          ngModel
+          type="password"
+          placeholder="Password"
+          #passwordInput="ngModel"
+          required
+          min-lenght="5"
+        />
+        <mat-error *ngIf="passwordInput.invalid"
+          >Please enter a password</mat-error
+        >
+      </mat-form-field>
+      <button
+        mat-raised-button
+        [disabled]="!loginForm.valid"
+        type="submit"
+        class="loginButton"
+      >
+        Login
+      </button>
+    </div>
+  </form>
+</mat-card>
