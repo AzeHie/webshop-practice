@@ -1,0 +1,84 @@
+<mat-card>
+  <mat-spinner *ngIf="isloading"></mat-spinner>
+  <div *ngIf="!isloading">
+    <h5 class="cartTitle">Shopping cart</h5>
+    <div *ngIf="cartEmpty" class="flex-cart-container">
+      <div class="borders">
+        <h2 class="emptycartHeader">Your cart is empty!</h2>
+        <img class="emptycartImg" src="/assets/images/emptycart.png" />
+      </div>
+      <div class="nav-container">
+        <div class="navHeader">
+          <h5>You might be interested about:</h5>
+        </div>
+        <div class="emptycartButtons">
+          <button class="navButton" mat-button routerLink="/products/clothes">
+            Clothes
+          </button>
+          <button
+            class="navButton"
+            mat-button
+            routerLink="/products/accessories"
+          >
+            Accessories
+          </button>
+          <button
+            class="navButton"
+            mat-button
+            routerLink="/products/wunderbaums"
+          >
+            Wunderbaums
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!cartEmpty">
+      <div class="hr-up"></div>
+      <div *ngFor="let item of cartItemList; let i = index">
+        <div class="productRow">
+          <img class="productImg" src="{{ item.imagePath }}" />
+          <div class="title">
+            <span>{{ item.title }}</span>
+          </div>
+          <div class="price">
+            <span>{{ item.price }}€</span>
+          </div>
+          <div class="deleteAndAmount">
+            <span>
+              <button class="deleteButton" (click)="onRemoveOne(item)">
+                <img class="deleteImg" src="../../assets/images/minus.png" />
+              </button>
+              <span class="amount">{{ item.amount }}</span>
+              <button class="deleteButton" (click)="onAddOne(item)">
+                <img class="deleteImg" src="../../assets/images/plus.png" />
+              </button>
+            </span>
+            <button class="deleteButton" (click)="onRemove(item)">
+              <img class="deleteImg" src="../../assets/images/delete1.png" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="orderTotal">
+        <div class="totalPrice">
+          <span
+            >Total price: <b class="grandTotal">{{ grandTotal }}€</b></span
+          >
+        </div>
+        <div class="itemsAmount">
+          <span>Total of {{ itemsAmount }} items</span>
+        </div>
+        <div class="continueShoppingButton">
+          <button class="navButton" mat-button (click)="continueShopping()">
+            continue shopping
+          </button>
+        </div>
+        <div class="proceedButton">
+          <button class="navButton" mat-button (click)="order()">
+            proceed to checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

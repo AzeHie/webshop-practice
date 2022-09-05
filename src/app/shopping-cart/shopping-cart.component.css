@@ -1,0 +1,161 @@
+mat-card {
+  width: 70vw;
+  background-color: white;
+  color: black;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+.cartTitle {
+  margin-bottom: 5px;
+}
+
+/* EMPTY CART */
+
+.flex-cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.borders {
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emptycartHeader {
+  padding-top: 15px;
+}
+
+.nav-container {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  justify-content: center;
+}
+
+.navHeader {
+  padding-top: 15px;
+  text-align: center;
+}
+
+.emptycartImg {
+  width: 50%;
+  height: auto;
+  margin: 15px 0 15px 0;
+}
+
+/* PRODUCTS IN CART */
+
+.productRow {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25% auto auto;
+  grid-template-rows: auto auto;
+  border-bottom: 1px solid black;
+  /* border-top: 1px solid black; */
+  margin-bottom: 10px;
+}
+
+.productImg {
+  width: 130px;
+  height: auto;
+  grid-row: 1 / span 2;
+}
+
+.hr-up {
+  border-top: 1px solid black;
+}
+
+.title {
+  align-self: start;
+  justify-self: start;
+  font-weight: bolder;
+  color: rgb(133, 51, 129);
+}
+
+.price {
+  align-self: start;
+  justify-self: end;
+  font-weight: bolder;
+  font-size: 25px;
+  padding: 0 5px;
+  color: rgb(133, 51, 129);
+}
+
+.deleteAndAmount {
+  justify-self: start;
+  align-self: end;
+}
+
+.amount {
+  font-weight: bolder;
+  border: 1px solid black;
+  padding: 0 6px;
+}
+
+.deleteButton {
+  border: none;
+  background-color: white;
+}
+
+.deleteImg {
+  width: 20px;
+  height: auto;
+}
+
+/* CART TOTAL */
+
+.orderTotal {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+}
+
+.totalPrice {
+  grid-column: 1 / span 2;
+  justify-self: center;
+  padding-top: 20px;
+  font-size: 20px;
+}
+
+.grandTotal {
+  font-size: 30px;
+}
+
+.itemsAmount {
+  grid-column: 1 / span 2;
+  justify-self: center;
+  font-size: 15px;
+  font-style: italic;
+  padding-bottom: 20px;
+}
+
+.proceedButton {
+  justify-self: end;
+}
+
+.continueShoppingButton {
+  justify-self: start;
+}
+
+/* BUTTONS */
+
+.navButton {
+  background-color: rgb(235, 209, 234);
+  transition: background 600ms ease;
+  margin: 5px;
+  min-width: 150px;
+}
+
+.navButton:hover {
+  background-color: rgb(203, 158, 201);
+}
+
+/* IMAGES */
