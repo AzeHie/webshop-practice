@@ -1,0 +1,83 @@
+<div class="pageContainer">
+  <div class="nav-bar">
+    <div class="nav-items">
+      <button
+        class="navBtnPrevious"
+        routerLink="/orders/order"
+        matTooltip="Cart"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/cart.png" />
+      </button>
+      <button
+        class="navBtnPrevious"
+        routerLink="/orders/delivery"
+        matTooltip="Address"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/contactdetails.png" />
+      </button>
+      <button
+        class="navBtnPrevious"
+        routerLink="/orders/shipping"
+        matTooltip=" method"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/deliveryaddress.png" />
+      </button>
+      <button
+        class="navBtnCurrent"
+        routerLink="/orders/payment"
+        matTooltip="Payment"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/paymentmethod.png" />
+      </button>
+      <button
+        [disabled]="!userChoice"
+        class="navBtnUpcoming"
+        (click)="onNavigation()"
+        matTooltip="Order review"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/orderarrow.png" />
+      </button>
+    </div>
+  </div>
+  <h3>Payment method</h3>
+  <div class="container">
+    <mat-radio-group [(ngModel)]="userChoice">
+      <div class="Method1">
+        <mat-radio-button value="Bank transfer">
+          <img class="companyImg" src="../../../assets/images/banklogo.png" />
+          <span> Bank transfer <i>(online payment)</i></span>
+        </mat-radio-button>
+      </div>
+      <div class="Method2">
+        <mat-radio-button value="Klarna">
+          <img class="companyImg" src="../../../assets/images/karna.png" />
+          <span> (K)LARNA <i>(part payment)</i></span>
+        </mat-radio-button>
+      </div>
+      <div class="Method3">
+        <mat-radio-button value="Mobilepay">
+          <img class="companyImg" src="../../../assets/images/mobilepay.png" />
+          <span> Mobilepay <i>(Pay with mobilepay)</i></span>
+        </mat-radio-button>
+      </div>
+    </mat-radio-group>
+    <div class="buttons">
+      <button mat-button class="backBtn" (click)="onPrevious()">
+        Previous page
+      </button>
+      <button
+        mat-button
+        class="continueBtn"
+        [disabled]="!userChoice"
+        (click)="onNavigation()"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+</div>
