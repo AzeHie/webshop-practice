@@ -1,0 +1,157 @@
+<div class="pageContainer">
+  <div class="nav-bar">
+    <div class="nav-items">
+      <button
+        class="navBtnPervious"
+        routerLink="/orders/order"
+        matTooltip="Cart"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/cart.png" />
+      </button>
+      <button
+        class="navBtnCurrent"
+        routerLink="/orders/delivery"
+        matTooltip="Address"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/contactdetails.png" />
+      </button>
+      <button
+        [disabled]="!isAuthed"
+        class="navBtnUpcoming"
+        (click)="onNavigation()"
+        matTooltip="Shipping method"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/deliveryaddress.png" />
+      </button>
+      <button
+        [disabled]="true"
+        class="navBtnUpcoming"
+        routerLink="/orders/payment"
+        matTooltip="Payment"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/paymentmethod.png" />
+      </button>
+      <button
+        [disabled]="true"
+        class="navBtnUpcoming"
+        routerLink="/orders/review"
+        matTooltip="Order review"
+        matTooltipPosition="below"
+      >
+        <img class="navImg" src="../../assets/images/orderarrow.png" />
+      </button>
+    </div>
+  </div>
+  <h3>Delivery address</h3>
+  <div class="container">
+    <div class="loginContainer" *ngIf="!isAuthed">
+      <h6>Please, log in to your account for user- and address details:</h6>
+      <mat-card>
+        <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+          <div class="flex-login-container">
+            <mat-form-field>
+              <input
+                class="inputti"
+                matInput
+                name="email"
+                ngModel
+                type="email"
+                placeholder="Email"
+                #emailInput="ngModel"
+                required
+                email
+              />
+              <mat-error *ngIf="emailInput.invalid"
+                >Please enter a valid email</mat-error
+              >
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="password"
+                ngModel
+                type="password"
+                placeholder="Password"
+                #passwordInput="ngModel"
+                required
+                min-lenght="5"
+              />
+              <mat-error *ngIf="passwordInput.invalid"
+                >Please enter a password</mat-error
+              >
+            </mat-form-field>
+            <button
+              mat-raised-button
+              [disabled]="!loginForm.valid"
+              type="submit"
+              class="loginButton"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </mat-card>
+      <h6>
+        Not a registered customer yet? Please, sign up
+        <a routerLink="/signup">here!</a>
+      </h6>
+    </div>
+    <div *ngIf="isAuthed">
+      <div class="nameHeader">
+        <h5>Customer:</h5>
+        <span class="imgBtn" (click)="onEdit()"
+          >Edit details
+          <img class="editImg" src="../../../assets/images/editblack.png"
+        /></span>
+      </div>
+      <div class="name">
+        <div class="firstname">
+          <label>Firstname:</label>
+          <span>{{ userDetails.firstname }}</span>
+        </div>
+        <div class="lastname">
+          <label>Lastname:</label>
+          <span>{{ userDetails.lastname }}</span>
+        </div>
+        <div class="email">
+          <label>Email:</label>
+          <span>{{ userDetails.email }}</span>
+        </div>
+      </div>
+      <div class="addressHeader">
+        <h5>Delivery address:</h5>
+      </div>
+      <div class="address">
+        <div class="streetAddress">
+          <label>Street address:</label>
+          <span>{{ userDetails.address }}</span>
+        </div>
+        <div class="postcode">
+          <label>Postcode:</label>
+          <span> {{ userDetails.postcode }}</span>
+        </div>
+        <div class="city">
+          <label>City:</label>
+          <span>{{ userDetails.city }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button mat-button class="backBtn" (click)="onPrevious()">
+        Previous page
+      </button>
+      <button
+        mat-button
+        class="continueBtn"
+        [disabled]="!isAuthed"
+        (click)="onNavigation()"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+</div>

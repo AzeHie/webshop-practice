@@ -1,0 +1,245 @@
+.pageContainer {
+  width: 98vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVIGATION BAR */
+
+.nav-bar {
+  width: 100%;
+  border-bottom: 1px solid rgb(179, 179, 179);
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.nav-items {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.navBtnPervious,
+.navBtnCurrent,
+.navBtnUpcoming {
+  padding: 15px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: none;
+}
+
+.navBtnPervious {
+  background-color: rgb(131, 255, 187);
+}
+
+.navBtnCurrent {
+  background-color: rgb(164, 120, 184);
+}
+
+.navBtnUpcoming {
+  background-color: rgb(179, 179, 179);
+}
+
+.navBtnUpcoming:disabled {
+  cursor: not-allowed;
+}
+
+.active {
+  background-color: rgb(164, 120, 184);
+}
+
+.navImg {
+  width: 30px;
+  height: auto;
+}
+
+/* DELIVERY PAGE */
+
+.container {
+  width: 80%;
+  margin: auto;
+  background-color: rgb(240, 240, 240);
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 1%;
+}
+
+h3 {
+  margin: auto;
+  width: 80%;
+}
+
+label {
+  font-weight: bolder;
+}
+
+/* LOGIN */
+
+.loginContainer {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-login-container {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+
+mat-card {
+  background-color: rgb(172, 172, 172);
+  margin: 20px 0;
+}
+
+mat-spinner {
+  margin: auto;
+  stroke: rgb(228, 89, 224);
+}
+
+mat-form-field {
+  text-align: center;
+}
+
+::ng-deep .mat-form-field-label {
+  color: black !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  background-color: black !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: rgb(158, 66, 157) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: rgb(158, 66, 157) !important;
+}
+
+.loginButton {
+  background-color: rgb(228, 89, 224);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  width: 30%;
+}
+
+.loginButton:disabled {
+  background-color: rgb(219, 137, 217);
+  cursor: not-allowed;
+}
+
+/* NAME */
+
+.name {
+  display: grid;
+  grid-template-columns: 25% auto;
+  grid-template-rows: auto auto;
+  background-color: rgb(231, 231, 231);
+  padding: 0 5px;
+}
+
+.nameHeader {
+  width: 100%;
+  margin: auto;
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 5px;
+  margin-bottom: 5px;
+}
+
+.firstname,
+.lastname,
+.email {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+}
+
+/* ADDRESS */
+
+.address {
+  display: grid;
+  grid-template-columns: 25% auto;
+  grid-template-rows: auto auto;
+  background-color: rgb(231, 231, 231);
+  padding: 0 5px;
+}
+
+.addressHeader {
+  width: 100%;
+  margin: auto;
+  background-color: rgb(240, 240, 240);
+  padding-top: 5px;
+  margin-bottom: 5px;
+  margin-top: 50px;
+}
+
+.streetAddress,
+.postcode,
+.city {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+}
+
+.streetAddress {
+  grid-column: 1 / span 2;
+}
+
+/* SHARED  */
+
+.imgBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.editImg {
+  width: 15px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+/* BUTTONS  */
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+
+.backBtn {
+  border: none;
+  background-color: rgb(235, 209, 234);
+  transition: background 600ms ease;
+  margin: 5px;
+  min-width: 150px;
+}
+
+.continueBtn {
+  align-self: flex-end;
+  border: none;
+  background-color: rgb(235, 209, 234);
+  transition: background 600ms ease;
+  margin: 5px;
+  min-width: 150px;
+}
+
+.continueBtn:disabled {
+  cursor: not-allowed;
+}
+
+.continueBtn:hover:not(:disabled),
+.backBtn:hover {
+  background-color: rgb(203, 158, 201);
+}
