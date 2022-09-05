@@ -1,0 +1,21 @@
+.body {
+  position: relative;
+  min-height: 100vh;
+  background-color: rgb(255, 255, 255);
+}
+
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 20px 20px 200px 20px;
+}
+
+.button1 {
+  background-color: rgb(235, 209, 234);
+}
+
+.nav-button:hover {
+  background-color: rgb(228, 89, 224);
+  color: black;
+}
