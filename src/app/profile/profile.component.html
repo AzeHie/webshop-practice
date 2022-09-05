@@ -1,0 +1,52 @@
+<div class="pageContainer">
+  <mat-card>
+    <div class="details">
+      <div class="header">
+        <div class="customerTitle">
+          <h5>
+            <img class="profileLogo" src="../../assets/images/profile.png" />
+            {{ userDetails.firstname }} {{ userDetails.lastname }}
+          </h5>
+        </div>
+        <div class="editDetails">
+          <span class="edit" (click)="onEdit()"
+            >Edit
+            <img class="profileLogo" src="../../assets/images/editblack.png"
+          /></span>
+        </div>
+      </div>
+      <div class="name">
+        <label>Customer name:</label>
+        <span>{{ userDetails.firstname }} {{ userDetails.lastname }}</span>
+      </div>
+      <div class="email">
+        <label>Email:</label>
+        <span>{{ userDetails.email }}</span>
+      </div>
+      <div class="password">
+        <span class="passwordBtn" routerLink="/profile/changepassword"
+          >Change password
+          <img class="profileLogo" src="../../assets/images/editblack.png"
+        /></span>
+      </div>
+    </div>
+    <div class="address">
+      <h5 class="addressHeader">
+        <img class="profileLogo" src="../../assets/images/delivery.png" />
+        Delivery address:
+      </h5>
+      <div class="streetAddress">
+        <label>Street address:</label>
+        <span>{{ userDetails.address }} </span>
+      </div>
+      <div class="postcode">
+        <label>Post code:</label>
+        <span>{{ userDetails.postcode }}</span>
+      </div>
+      <div class="city">
+        <label>City:</label>
+        <span>{{ userDetails.city }}</span>
+      </div>
+    </div>
+  </mat-card>
+</div>
