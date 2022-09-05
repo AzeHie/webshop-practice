@@ -1,0 +1,86 @@
+<mat-card>
+  <form [formGroup]="form" (submit)="onSave()" #editForm="ngForm">
+    <div class="grid-login-container">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="firstname"
+          placeholder="Firstname"
+        />
+        <mat-error *ngIf="form.get('firstname').invalid"
+          >Please enter a firstname</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="lastname"
+          placeholder="Lastname"
+        />
+        <mat-error *ngIf="form.get('lastname').invalid"
+          >Please enter a lastname</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="email">
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+        />
+        <mat-error *ngIf="form.get('email').invalid"
+          >Please enter a valid email</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="address">
+        <input
+          matInput
+          type="text"
+          formControlName="address"
+          placeholder="Address"
+        />
+        <mat-error *ngIf="form.get('address').invalid"
+          >Please enter a valid address</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="postcode"
+          placeholder="Post code"
+        />
+        <mat-error *ngIf="form.get('postcode').invalid"
+          >Please enter a valid postcode</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" formControlName="city" placeholder="City" />
+        <mat-error *ngIf="form.get('city').invalid"
+          >Please enter a city</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="buttons">
+      <button
+        mat-button
+        type="submit"
+        class="navButton"
+        [disabled]="!editForm.valid"
+      >
+        Save changes
+      </button>
+      <button
+        style="margin-left: 3px"
+        mat-button
+        class="navButton"
+        type="button"
+        (click)="onCancel()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</mat-card>
