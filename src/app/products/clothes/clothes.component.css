@@ -1,0 +1,107 @@
+.flex-page-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* ORDER CHANGE */
+
+.orderChange {
+  width: 100%;
+  margin-left: 10px;
+  margin-bottom: -8px;
+}
+
+.orderItems {
+  position: relative;
+  display: inline-block;
+}
+
+.orderOptions {
+  display: none;
+  position: absolute;
+  background-color: rgb(173, 143, 187);
+  min-width: auto;
+  box-shadow: 0px 2px 4px 0px black;
+  z-index: 1;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.orderOptions span {
+  color: black;
+  padding: 8px 12px;
+  display: block;
+}
+
+.orderOptions span:hover {
+  background-color: rgb(194, 179, 201);
+}
+
+.orderItems:hover .orderOptions {
+  display: block;
+}
+
+.orderButton {
+  background-color: white;
+  border: 1px solid black;
+}
+
+.orderImg {
+  width: 10px;
+  height: auto;
+}
+
+
+/* PRODUCT CARDS */
+
+mat-card {
+  background-color: rgb(255, 255, 255);
+  height: 300px;
+  width: 250px;
+  margin: 10px;
+  color: black;
+}
+
+.flex-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: black;
+  text-decoration: none;
+}
+
+.price {
+  padding-bottom: 20px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 25px;
+  color: black;
+}
+
+button {
+  background-color: rgb(235, 209, 234);
+  transition: background 600ms ease;
+}
+
+button:hover {
+  background-color: rgb(203, 158, 201);
+}
+
+.productImg {
+
+  height: 150px;
+  width: auto;
+  margin: auto;
+}

@@ -1,0 +1,21 @@
+<mat-spinner *ngIf="isloading"></mat-spinner>
+<div class="flex-page-container" *ngIf="!isloading">
+  <div class="orderChange">
+    <div class="orderItems">
+      <button class="orderButton">
+        Change order
+        <img class="orderImg" src="../../assets/images/orderbutton.png" />
+      </button>
+      <div class="orderOptions">
+        <span (click)="orderByPrice()">Order by price</span>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let product of clothes">
+    <mat-card class="flex-card-container" [routerLink]="[product.productId]">
+      <img class="productImg" src="{{ product.imagePath }}" />
+      <p class="title">{{ product.title }}</p>
+      <p class="price">{{ product.price }}€</p>
+    </mat-card>
+  </div>
+</div>
