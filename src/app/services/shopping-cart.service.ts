@@ -19,17 +19,18 @@ export class ShoppingCartService {
   }
 
   updateCartOnLogin() {
-    // if there is items in cart on log in, add them to personal cart in the database
+    // if there is items in localstorage when user logs in, add them to the personal cart in the database
     let isAuthed = true;
     let itemsFromStorage = [];
+
     const storage = JSON.parse(localStorage.getItem('cartItems'));
     if (!storage) {
       this.loadCartData(isAuthed);
       isAuthed = false;
     } else {
-      for (let i = 0; i < storage.length; i++) {
-        itemsFromStorage.push(storage[i]);
-      }
+      storage.forEach(item => {
+        itemsFromStorage.push(item);
+      });
       this.http
         .put<{ message: string; cartItems: any }>(
           BACKEND_URL + '/addStorageItems',
@@ -42,8 +43,10 @@ export class ShoppingCartService {
     }
   }
 
+
   loadCartData(authed: boolean) {
     let isAuthed = authed;
+
     if (isAuthed) {
       this.http
         .get<{ message: string; cartItems: any }>(BACKEND_URL)
@@ -57,7 +60,7 @@ export class ShoppingCartService {
           }
         });
     } else {
-      // not authed, load items from the local storage only
+      // if not authed, load items from the local storage only
       const cartItems = JSON.parse(localStorage.getItem('cartItems'));
       this.cartItemList = cartItems;
       if (!this.cartItemList) {
@@ -69,18 +72,16 @@ export class ShoppingCartService {
     }
   }
 
+
   addToCart(product: any, authed: boolean) {
     let isAuthed = authed;
     let modifiedProduct;
     this.cartItemList = this.cartItemList || [];
 
-    // already in cart?, for requests coming from productServices
-    for (let item of this.cartItemList) {
-      if (product.productId === item.productId) {
-        product = item;
-      }
-    }
-    // add amount "field" to the product, if doesn't exist already
+    // check if product is already in cart?, for requests coming from productServices
+    product = this.cartItemList.filter(item => product.productId === item.productId);
+
+    // add amount field to the product, if doesn't exist already
     if (!product.amount) {
       modifiedProduct = {
         ...product,
@@ -91,32 +92,40 @@ export class ShoppingCartService {
     }
     modifiedProduct.price = parseFloat(modifiedProduct.price);
 
-    // "EDIT" excisting product in the shopping cart(when changing amount of item)
-    for (let i = 0; i < this.cartItemList.length; i++) {
-      if (this.cartItemList[i].productId === modifiedProduct.productId) {
-        let aPrice = modifiedProduct.price / this.cartItemList[i].amount;
-        modifiedProduct.price += aPrice;
-        modifiedProduct.amount++;
-        modifiedProduct.price = modifiedProduct.price.toFixed(2);
-        this.cartItemList[i] = modifiedProduct;
-        if (isAuthed) {
-          let productData = {
-            productId: modifiedProduct.productId,
-            price: modifiedProduct.price,
-            amount: modifiedProduct.amount,
-          };
-          this.http
-            .put<{ message: string; cartItem: any }>(BACKEND_URL, productData)
-            .subscribe((res) => {});
-        }
-        localStorage.setItem('cartItems', JSON.stringify(this.cartItemList));
-        this.productList.next(this.cartItemList);
-        this.calcTotals();
-        return;
+    // "EDIT" excisting product in the shopping cart (when changing amount of item):
+    let productForEdit = this.cartItemList.filter(item => item.productId === modifiedProduct.productId);
+
+    if(productForEdit.length > 0) {
+      let aPrice = modifiedProduct.price / productForEdit[0].amount;
+      modifiedProduct.price += aPrice;
+      modifiedProduct.amount++;
+      modifiedProduct.price = modifiedProduct.price.toFixed(2);
+      if (isAuthed) {
+        let productData = {
+          productId: modifiedProduct.productId,
+          price: modifiedProduct.price,
+          amount: modifiedProduct.amount,
+        };
+        this.http
+          .put<{ message: string; cartItem: any }>(BACKEND_URL, productData)
+          .subscribe((res) => {});
       }
+
+      // update localstorage && productList subject:
+      this.cartItemList = this.cartItemList.map(item => {
+        if (item.productId === modifiedProduct.productId) {
+          return modifiedProduct;
+        }
+        return item;
+      });
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItemList));
+      this.productList.next(this.cartItemList);
+      this.calcTotals();
+      return;
     }
-    // adding new item (not editing excisting one)
+    // add new item to cart, didn't exist already
     modifiedProduct.price = modifiedProduct.price.toFixed(2);
+
     if (isAuthed) {
       let productData: any;
       productData = {
@@ -138,12 +147,13 @@ export class ShoppingCartService {
     this.calcTotals();
   }
 
+
   calcTotals() {
     //calc price
     let totalPrice = 0;
     let grandTotal;
-    this.cartItemList.map((a: any) => {
-      totalPrice += +a.price;
+    this.cartItemList.map((item: any) => {
+      totalPrice += +item.price;
     });
     grandTotal = totalPrice.toFixed(2);
     this.totalPrice.next(grandTotal);
@@ -156,59 +166,69 @@ export class ShoppingCartService {
     this.amountOfItems.next(itemsTotal);
   }
 
+
   getTotalPrice() {
     return this.totalPrice.asObservable();
   }
+
 
   getAmountOfItems() {
     return this.amountOfItems.asObservable();
   }
 
-  removeFromCart(item: any, deleteOne: boolean, authed: boolean) {
+
+  removeFromCart(product: any, deleteOne: boolean, authed: boolean) {
     let isAuthed = authed;
-    for (let i = 0; i < this.cartItemList.length; i++) {
-      if (item.productId === this.cartItemList[i].productId) {
-        if (deleteOne && this.cartItemList[i].amount > 1) {
-          let aPrice = this.cartItemList[i].price / this.cartItemList[i].amount;
-          this.cartItemList[i].price -= aPrice;
-          this.cartItemList[i].price = this.cartItemList[i].price.toFixed(2);
-          this.cartItemList[i].amount--;
-          if (isAuthed) {
-            let productData = {
-              productId: this.cartItemList[i].productId,
-              price: this.cartItemList[i].price,
-              amount: this.cartItemList[i].amount,
-            };
-            this.http
-              .put<{ message: string; product: any }>(BACKEND_URL, productData)
-              .subscribe((res) => {});
-          }
-          localStorage.setItem('cartItems', JSON.stringify(this.cartItemList));
-        } else {
-          if (isAuthed) {
-            let productId = this.cartItemList[i].productId;
-            this.http
-              .delete<{ message: string }>(BACKEND_URL + productId)
-              .subscribe((res) => {});
-          }
-          this.cartItemList.splice(i, 1);
+    let productForEdit;
+
+    productForEdit = this.cartItemList.filter(item => item.productId === product.productId);
+
+    // if amount > 1, then edit cart: (else, remove whole product)..
+    if(productForEdit.amount > 1 && deleteOne) {
+      let aPrice = +productForEdit.price / +productForEdit.amount;
+      productForEdit.price -= aPrice;
+      productForEdit.price = productForEdit.price.toFixed(2);
+      productForEdit.amount--;
+
+      if (isAuthed) {
+        const productData = {
+          productId: productForEdit.productId,
+          price: productForEdit.price,
+          amount: productForEdit.amount
+        };
+        this.http
+          .put<{ message: string; product: any }>(BACKEND_URL, productData)
+            .subscribe((res) => {});
+      };
+
+      this.cartItemList = this.cartItemList.map(item => {
+        if (item.productId === product.productId) {
+          return productForEdit;
         }
-        break;
+        return item;
+      });
+
+      localStorage.setItem('cartItems', JSON.stringify(this.cartItemList));
+
+    } else { // remove whole product;
+      if (isAuthed) {
+        let productId = productForEdit.productId;
+        this.http
+          .delete<{ message: string }>(BACKEND_URL + productId)
+          .subscribe((res) => {});
       }
+      this.cartItemList = this.cartItemList.filter(item => item.productId === productForEdit.productId);
     }
     if (this.cartItemList.length < 1) {
-      this.emptyCart(isAuthed);
+      this.emptyCart();
     } else {
       this.productList.next(this.cartItemList);
       this.calcTotals();
     }
   }
 
-  emptyCart(isAuthed: boolean) {
+  emptyCart() {
     this.cartItemList = [];
-    if (isAuthed) {
-      this.http.delete<{ message: string }>(BACKEND_URL).subscribe((res) => {});
-    }
     this.productList.next(this.cartItemList);
     localStorage.removeItem('cartItems');
     this.calcTotals();
