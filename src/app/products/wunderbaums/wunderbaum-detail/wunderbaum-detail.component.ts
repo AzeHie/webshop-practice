@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { Wunderbaum } from '../wunderbaum.model';
 import { WunderbaumsService } from '../../../services/wunderbaums.service';
+import { Subscription } from 'rxjs';
+import { Product } from '../../product-model';
 
 @Component({
   selector: 'app-wunderbaum-detail',
@@ -13,9 +14,12 @@ import { WunderbaumsService } from '../../../services/wunderbaums.service';
 export class WunderbaumDetailComponent implements OnInit {
   productType = 'wunderbaums';
   id: string;
+  userId: string;
   isAuthed = false;
-  wunderbaum: Wunderbaum;
+  isAdmin = false;
+  wunderbaum: Product;
   productImage: string;
+  userDetailsSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +45,19 @@ export class WunderbaumDetailComponent implements OnInit {
           };
         });
     });
+    this.userDetailsSub = this.authService
+    .getUserUpdateListener()
+    .subscribe((authData) => {
+      if (authData) {
+        // temp solution for productUpload - NOT SAFE TO USE IN REAL PROJECTS!
+        this.userId = authData.id;
+        if (this.userId === '62852397eb4f09af1b48e6cf') {
+          this.isAdmin = true;
+        }
+      }
+    });
     this.isAuthed = this.authService.getIsAuthed();
+
   }
 
   onAddToCart(product: any) {
