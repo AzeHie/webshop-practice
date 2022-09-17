@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Wunderbaum } from '../products/wunderbaums/wunderbaum.model';
+import { Product } from '../products/product-model';
 
 const BACKEND_URL = environment.apiUrl + 'wunderbaums/';
 
 @Injectable({ providedIn: 'root' })
 export class WunderbaumsService {
-  private wunderbaumsUpdated = new Subject<{ wunderbaums: Wunderbaum[] }>();
-  private wunderbaums: Wunderbaum[] = [];
+  private wunderbaumsUpdated = new Subject<{ wunderbaums: Product[] }>();
+  private wunderbaums: Product[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -68,7 +68,7 @@ export class WunderbaumsService {
     wunderbaumData.append('description', description);
     wunderbaumData.append('price', price);
     this.http
-      .post<{ message: string; wunderbaum: Wunderbaum }>(
+      .post<{ message: string; wunderbaum: Product }>(
         BACKEND_URL,
         wunderbaumData
       )
@@ -84,7 +84,7 @@ export class WunderbaumsService {
     description: string,
     price: string
   ) {
-    let wunderbaumData: Wunderbaum | FormData;
+    let wunderbaumData: Product | FormData;
     if (typeof image === 'object') {
       wunderbaumData = new FormData();
       wunderbaumData.append('id', id);
