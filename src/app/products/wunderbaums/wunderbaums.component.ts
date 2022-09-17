@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ShoppingCartService } from '../../services/shopping-cart.service';
-import { Wunderbaum } from './wunderbaum.model';
 import { WunderbaumsService } from '../../services/wunderbaums.service';
+import { Product } from '../product-model';
 
 @Component({
   selector: 'app-wunderbaums',
@@ -15,15 +14,14 @@ export class WunderbaumsComponent implements OnInit {
   order = true;
 
   constructor(
-    private wunderbaumsService: WunderbaumsService,
-    private shoppingCartService: ShoppingCartService
+    private wunderbaumsService: WunderbaumsService
   ) {}
 
   ngOnInit() {
     this.wunderbaumsService.getWunderbaums();
     this.wunderbaumsSub = this.wunderbaumsService
       .getWunderbaumUpdateListener()
-      .subscribe((wunderbaumData: { wunderbaums: Wunderbaum[] }) => {
+      .subscribe((wunderbaumData: { wunderbaums: Product[] }) => {
         this.wunderbaums = wunderbaumData.wunderbaums;
       });
   }
