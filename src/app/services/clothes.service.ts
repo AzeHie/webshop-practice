@@ -21,7 +21,7 @@ export class ClothesService {
     this.http
       .get<{ message: string; clothes: any }>(BACKEND_URL)
       .pipe(
-        map((productData) => {
+        map((productData) => { // adding the productId which we got (and created) from mongoDB
           return {
             clothes: productData.clothes.map((product) => {
               return {
