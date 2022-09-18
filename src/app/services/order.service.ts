@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { EventDialogComponent } from '../shared/event-dialog/event-dialog.component';
+
 import { AuthService } from './auth.service';
 import { ShoppingCartService } from './shopping-cart.service';
 
@@ -23,27 +21,27 @@ export class OrderService {
     private authService: AuthService,
     private shoppingCartService: ShoppingCartService,
     private http: HttpClient,
-    private router: Router,
-    private dialog: MatDialog
+    private router: Router
   ) {}
 
   addProducts(products: any[]) {
-    const tempProducts = [];
-    for (let item of products) {
+    const tempProducts = products.map(item => {
       const product = {
         productId: item.productId,
         title: item.title,
         price: item.price,
-        amount: item.amount,
+        amount: item.amount
       };
-      tempProducts.push(product);
-    }
+      return product;
+    });
+
     this.products = tempProducts;
     localStorage.setItem('orderProducts', JSON.stringify(this.products));
   }
 
   addCustomerDetails() {
     let customer = this.authService.getUserDetails();
+    
     this.customerDetails = {
       id: customer.id,
       firstname: customer.firstname,
