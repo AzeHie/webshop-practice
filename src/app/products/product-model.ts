@@ -4,18 +4,21 @@ export class Product {
   public imagePath: string;
   public description: string;
   public price: string;
+  public productType?: string;
 
   constructor(
     id: string,
     title: string,
     imagePath: string,
     description: string,
-    price: string
+    price: string,
+    productType: string
   ) {
     this.productId = id;
     this.title = title;
     this.imagePath = imagePath;
     this.description = description;
     this.price = price;
+    this.productType = productType;
   }
-}
+};
