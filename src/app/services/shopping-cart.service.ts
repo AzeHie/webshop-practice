@@ -220,17 +220,22 @@ export class ShoppingCartService {
       this.cartItemList = this.cartItemList.filter(item => item.productId === productForEdit.productId);
     }
     if (this.cartItemList.length < 1) {
-      this.emptyCart();
+      this.emptyCart(isAuthed);
     } else {
       this.productList.next(this.cartItemList);
       this.calcTotals();
     }
   }
 
-  emptyCart() {
+  emptyCart(isAuthed: boolean) {
     this.cartItemList = [];
     this.productList.next(this.cartItemList);
     localStorage.removeItem('cartItems');
     this.calcTotals();
+
+    // for request coming from order service, when the order is sent:
+    if (isAuthed) {
+      this.http.delete<{ message: string }>(BACKEND_URL).subscribe((res) => {});
+    }
   }
 }
