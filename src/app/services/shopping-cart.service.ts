@@ -73,14 +73,17 @@ export class ShoppingCartService {
   }
 
 
-  addToCart(product: any, authed: boolean) {
+  async addToCart(product: any, authed: boolean) {
     let isAuthed = authed;
     let modifiedProduct;
     this.cartItemList = this.cartItemList || [];
 
-    // check if product is already in cart?, for requests coming from productServices
-    product = this.cartItemList.filter(item => product.productId === item.productId);
-
+    // check if product is already in cart?, for requests coming from productDetails (not from shopping cart)
+    for (let item of this.cartItemList) {
+      if (product.productId === item.productId) {
+        product = item;
+      }
+    }
     // add amount field to the product, if doesn't exist already
     if (!product.amount) {
       modifiedProduct = {
@@ -181,7 +184,8 @@ export class ShoppingCartService {
     let isAuthed = authed;
     let productForEdit;
 
-    productForEdit = this.cartItemList.filter(item => item.productId === product.productId);
+    const alreadyInCart = this.cartItemList.filter(item => item.productId === product.productId);
+    productForEdit = alreadyInCart[0];
 
     // if amount > 1, then edit cart: (else, remove whole product)..
     if(productForEdit.amount > 1 && deleteOne) {
@@ -217,7 +221,7 @@ export class ShoppingCartService {
           .delete<{ message: string }>(BACKEND_URL + productId)
           .subscribe((res) => {});
       }
-      this.cartItemList = this.cartItemList.filter(item => item.productId === productForEdit.productId);
+      this.cartItemList = this.cartItemList.filter(item => item.productId !== productForEdit.productId);
     }
     if (this.cartItemList.length < 1) {
       this.emptyCart(isAuthed);
