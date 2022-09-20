@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'accessories/:accessoryId', component: AccessoriesDetailComponent },
   { path: 'giftcards', component: GiftCardsComponent },
   { path: 'upload', component: ProductUploadComponent },
-  { path: 'upload/:productType/:productId', component: ProductUploadComponent },
+  { path: 'upload/:productId', component: ProductUploadComponent },
 ];
 
 @NgModule({
