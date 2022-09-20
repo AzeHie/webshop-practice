@@ -6,6 +6,7 @@ const app = express();
 
 const clothRoutes = require("./routes/clothes");
 const wunderbaumRoutes = require("./routes/wunderbaums");
+const productRoutes = require("./routes/products");
 const shoppingCartRoutes = require("./routes/shoppingcart");
 const authRoutes = require("./routes/auth");
 const orderRoutes = require("./routes/orders");
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
 
 app.use("/api/wunderbaums", wunderbaumRoutes);
 app.use("/api/clothes", clothRoutes);
+app.use("/api/products", productRoutes);
 app.use("/api/shoppingcart", shoppingCartRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
