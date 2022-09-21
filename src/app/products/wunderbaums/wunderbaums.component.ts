@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
 import { WunderbaumsService } from '../../services/wunderbaums.service';
 import { Product } from '../product-model';
 
@@ -14,13 +15,13 @@ export class WunderbaumsComponent implements OnInit {
   order = true;
 
   constructor(
-    private wunderbaumsService: WunderbaumsService
+    private productService: ProductService
   ) {}
 
   ngOnInit() {
-    this.wunderbaumsService.getWunderbaums();
-    this.wunderbaumsSub = this.wunderbaumsService
-      .getWunderbaumUpdateListener()
+    this.productService.getProducts();
+    this.wunderbaumsSub = this.productService
+      .getWunderbaumsUpdateListener()
       .subscribe((wunderbaumData: { wunderbaums: Product[] }) => {
         this.wunderbaums = wunderbaumData.wunderbaums;
       });
