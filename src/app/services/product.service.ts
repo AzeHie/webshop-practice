@@ -16,14 +16,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getProductUpdateListener(productType: string) {
-    if (productType === 'Wunderbaum') {
-      return this.wunderbaumsUpdated.asObservable();
-    }
-    if (productType === 'Clothes') {
-      return this.clothesUpdated.asObservable();
-    }
-    return null;
+  getClothesUpdateListener() {
+    return this.clothesUpdated.asObservable();
+  }
+
+  getWunderbaumsUpdateListener() {
+    return this.wunderbaumsUpdated.asObservable();
   }
 
   getProducts() {
