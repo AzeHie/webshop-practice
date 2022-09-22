@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from '../product-model';
 import { ClothesService } from '../../services/clothes.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-clothes',
@@ -14,13 +15,13 @@ export class ClothesComponent implements OnInit, OnDestroy {
   order = true;
   isloading = false;
 
-  constructor(private clothesService: ClothesService) {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.isloading = true;
-    this.clothesService.getClothes();
-    this.productSub = this.clothesService
-      .getClothUpdateListener()
+    this.productService.getProducts();
+    this.productSub = this.productService
+      .getClothesUpdateListener()
       .subscribe((productData: { clothes: Product[] }) => {
         this.clothes = productData.clothes;
         this.isloading = false;
