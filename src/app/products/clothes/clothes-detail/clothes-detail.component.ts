@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Product } from 'src/app/products/product-model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { ClothesService } from '../../../services/clothes.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-clothes-detail',
@@ -20,7 +21,7 @@ export class ClothesDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private clothesService: ClothesService,
+    private productService: ProductService,
     private shoppingCartService: ShoppingCartService,
     private authService: AuthService
   ) {}
@@ -28,7 +29,7 @@ export class ClothesDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = paramMap.get('clothId');
-      this.clothesService.getSingleProduct(this.id).subscribe((product) => {
+      this.productService.getSingleProduct(this.id).subscribe((product) => {
         this.productImage = product.imagePath;
         this.product = {
           productId: product._id,
@@ -53,7 +54,7 @@ export class ClothesDetailComponent implements OnInit {
   }
 
   onDelete() {
-    this.clothesService.deleteProduct(this.id).subscribe(() => {
+    this.productService.deleteProduct(this.id).subscribe(() => {
       this.backToProducts();
     });
   }
