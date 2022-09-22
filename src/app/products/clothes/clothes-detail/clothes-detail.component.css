@@ -20,6 +20,7 @@ mat-card {
   display: flex;
   flex-direction: row;
   justify-content: left;
+  width: 70px;
 }
 
 .title {
