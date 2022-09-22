@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ClothesService } from '../services/clothes.service';
 import { Product } from '../products/product-model';
-import { WunderbaumsService } from '../services/wunderbaums.service';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-homepage',
@@ -17,33 +16,27 @@ export class HomepageComponent implements OnInit, OnDestroy {
   private clothesSub: Subscription;
 
   constructor(
-    private wunderbaumsService: WunderbaumsService,
-    private clothesService: ClothesService
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
-    this.wunderbaumsService.getWunderbaums();
-    this.clothesService.getClothes();
-    // this.accessoriesService.getAccessories();
-    this.wunderbaumsSub = this.wunderbaumsService
-      .getWunderbaumUpdateListener()
+    this.productService.getProducts();
+
+    this.wunderbaumsSub = this.productService
+      .getWunderbaumsUpdateListener()
       .subscribe((resData: { wunderbaums: Product[] }) => {
         this.wunderbaums = resData.wunderbaums;
       });
-    this.clothesSub = this.clothesService
-      .getClothUpdateListener()
+
+    this.clothesSub = this.productService
+      .getClothesUpdateListener()
       .subscribe((resData: { clothes: Product[] }) => {
         this.clothes = resData.clothes;
       });
-    // this.accessoriesSub = this.accessoriesService.getAccessoryUpdateListener()
-    //   .subscribe((resData: { accessories: Product[] }) => {
-    //     this.accessories = resData.accessories
-    //   });
   }
 
   ngOnDestroy(): void {
     this.wunderbaumsSub.unsubscribe();
     this.clothesSub.unsubscribe();
-    // this.accessoriesSub.unsubscribe();
   }
 }
