@@ -85,7 +85,7 @@ exports.deleteProduct = async (req, res, next) => {
   try {
     const result = await Product.deleteOne({ _id: req.params.id });
     if (result.deletedCount > 0) {
-      return res.status(Q200).json({ message: "Product deleted successfully!" });
+      return res.status(200).json({ message: "Product deleted successfully!" });
     } else {
       return res.status(401).json({ message: "Product deletion failed due you're not authorized!"});
     }
