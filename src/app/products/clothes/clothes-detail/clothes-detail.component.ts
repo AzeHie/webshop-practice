@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Product } from 'src/app/products/product-model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
-import { ClothesService } from '../../../services/clothes.service';
+import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -16,7 +16,10 @@ export class ClothesDetailComponent implements OnInit {
   product: Product;
   id: string;
   productImage: string;
+  userId: string;
+  isAdmin = false;
   isAuthed = false;
+  userDetailsSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +43,18 @@ export class ClothesDetailComponent implements OnInit {
         };
       });
     });
+    this.userDetailsSub = this.authService
+      .getUserUpdateListener()
+      .subscribe((authData) => {
+        if (authData) {
+          // temp solution for productUpload - NOT SAFE TO USE IN REAL PROJECTS!
+          this.userId = authData.id;
+          if (this.userId === '62852397eb4f09af1b48e6cf') {
+            this.isAdmin = true;
+          }
+        }
+      });
+
     this.isAuthed = this.authService.getIsAuthed();
   }
 
