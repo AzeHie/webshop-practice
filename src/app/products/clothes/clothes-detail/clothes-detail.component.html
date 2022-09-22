@@ -10,7 +10,7 @@
     </button>
     <span class="title">{{ product?.title }}</span>
     <div class="edit-and-delete">
-      <button class="backButton" (click)="onEdit()">
+      <button class="backButton" (click)="onEdit()" *ngIf="isAdmin">
         <img
           class="editImg"
           src="../../../assets/images/editblack.png"
@@ -18,7 +18,7 @@
           matTooltipPosition="below"
         />
       </button>
-      <button class="backButton" (click)="onDelete()">
+      <button class="backButton" (click)="onDelete()" *ngIf="isAdmin">
         <img
           class="editImg"
           src="../../../assets/images/delete1.png"
