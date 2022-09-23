@@ -1,38 +1,21 @@
 const CartItem = require("../models/cartitem");
 
-exports.loadCart = (req, res, next) => {
-  let cartItems = [];
-  let creatorId = req.userData.userId;
-  const cartQuery = CartItem.find({ creator: req.userData.userId });
-  cartQuery
-    .then((documents) => {
-      for (let i = 0; i < documents.length; i++) {
-        if (documents[i].creator == creatorId) {
-          let item = {
-            productId: documents[i].productId,
-            title: documents[i].title,
-            price: documents[i].price,
-            imagePath: documents[i].imagePath,
-            description: documents[i].description,
-            amount: documents[i].amount,
-            creator: documents[i].creator,
-          };
-          cartItems.push(item);
-        }
-      }
-      res.status(200).json({
-        message: "Cart loaded successfully!",
-        cartItems: cartItems,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: "Loading cart failed!",
-      });
+exports.loadCart = async (req, res, next) => {
+  try {
+    const cartQuery = await CartItem.find({ creator: req.userData.userId });
+
+    return res.status(200).json({
+      message: "Cart loaded successfully!",
+      cartItems: cartQuery
     });
+  } catch (err) {
+    return res.status(500).json({
+      message: "Loading the cart failed!"
+    })
+  };
 };
 
-exports.addCartItem = (req, res, next) => {
+exports.addCartItem = async (req, res, next) => {
   const cartItem = new CartItem({
     productId: req.body.productId,
     title: req.body.title,
@@ -42,21 +25,20 @@ exports.addCartItem = (req, res, next) => {
     imagePath: req.body.imagePath,
     creator: req.userData.userId,
   });
-  cartItem
-    .save()
-    .then((addedCartItem) => {
-      res.status(201).json({
-        message: "New item added successfully",
-        cartItem: {
-          ...addedCartItem,
-        },
-      });
-    })
-    .catch((error) => {
+
+  try {
+    await cartItem.save();
+    res.status(201).json({
+      message: "New item added successfully",
+      cartItem: {
+        ...addedCartItem,
+      },
+    });
+  } catch (err) {
       res.status(500).json({
         message: "Adding new item failed!",
       });
-    });
+  };
 };
 
 exports.addStorageItems = async (req, res, next) => {
@@ -64,8 +46,9 @@ exports.addStorageItems = async (req, res, next) => {
   let currentCart = await CartItem.find({
     creator: req.userData.userId,
   });
+
   try {
-    if (currentCart.length < 1) {
+    if (!currentCart) {
       // if there is no items in the user's cart already
       for (let storageItem of storageCart) {
         const cartItem = new CartItem({
@@ -116,7 +99,7 @@ exports.addStorageItems = async (req, res, next) => {
             });
 
             const AlreadyInCart = (item, currentCart) => {
-              // because we don't want to add same item twice?
+              // because we don't want to add the same item twice?
               for (let i = 0; i < currentCart.length; i++) {
                 if (currentCart[i].productId === item.productId) {
                   return true;
