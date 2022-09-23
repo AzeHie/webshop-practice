@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
 
-const clothRoutes = require("./routes/clothes");
-const wunderbaumRoutes = require("./routes/wunderbaums");
 const productRoutes = require("./routes/products");
 const shoppingCartRoutes = require("./routes/shoppingcart");
 const authRoutes = require("./routes/auth");
@@ -42,8 +40,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/wunderbaums", wunderbaumRoutes);
-app.use("/api/clothes", clothRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/shoppingcart", shoppingCartRoutes);
 app.use("/api/auth", authRoutes);
