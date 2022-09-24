@@ -6,13 +6,13 @@ exports.loadCart = async (req, res, next) => {
 
     return res.status(200).json({
       message: "Cart loaded successfully!",
-      cartItems: cartQuery
+      cartItems: cartQuery,
     });
   } catch (err) {
     return res.status(500).json({
-      message: "Loading the cart failed!"
-    })
-  };
+      message: "Loading the cart failed!",
+    });
+  }
 };
 
 exports.addCartItem = async (req, res, next) => {
@@ -31,25 +31,26 @@ exports.addCartItem = async (req, res, next) => {
     res.status(201).json({
       message: "New item added successfully",
       cartItem: {
-        ...addedCartItem,
+        ...cartItem,
       },
     });
   } catch (err) {
-      res.status(500).json({
-        message: "Adding new item failed!",
-      });
-  };
+    res.status(500).json({
+      message: "Adding new item failed!",
+    });
+  }
 };
 
 exports.addStorageItems = async (req, res, next) => {
   const storageCart = req.body;
-  let currentCart = await CartItem.find({
-    creator: req.userData.userId,
-  });
 
   try {
-    if (!currentCart) {
-      // if there is no items in the user's cart already
+    let currentCart = await CartItem.find({
+      creator: req.userData.userId,
+    });
+
+    if (currentCart.length < 1) {
+      // if there is no items in the user's cart already, add them one by one
       for (let storageItem of storageCart) {
         const cartItem = new CartItem({
           productId: storageItem.productId,
@@ -62,62 +63,43 @@ exports.addStorageItems = async (req, res, next) => {
         });
         await cartItem.save();
       }
-    } else {
+    } else { // there was items in the user's cart already, there is chance that we have to edit some of them
       for (let storageItem of storageCart) {
-        for (let i = 0; i < currentCart.length; i++) {
-          if (storageItem.productId === currentCart[i].productId) {
-            // check if item is already in the user's cart, if so, edit price and amount
+        currentCart = await currentCart.map((cartItem) => {
+          if (storageItem.productId === cartItem.productId) { // if item exists in cart already, edit amount & price
             let tempItem = storageItem;
             tempItem.price = parseFloat(tempItem.price);
-            tempItem.price += +currentCart[i].price;
-            tempItem.amount += currentCart[i].amount;
+            tempItem.price += +cartItem.price;
             tempItem.price = tempItem.price.toFixed(2);
-            await CartItem.findOneAndUpdate(
-              {
-                $and: [
-                  { creator: req.userData.userId },
-                  { productId: tempItem.productId },
-                ],
-              },
-              { price: tempItem.price, amount: tempItem.amount },
-              { returnDocument: "after" }
-            );
-            currentCart = await CartItem.find({
-              creator: req.userData.userId,
-            });
-            break;
+            tempItem.amount += cartItem.amount;
+            return tempItem;
           } else {
-            // if item is not in the user's cart already
-            const cartItem = new CartItem({
-              productId: storageItem.productId,
-              title: storageItem.title,
-              price: storageItem.price,
-              description: storageItem.description,
-              amount: storageItem.amount,
-              imagePath: storageItem.imagePath,
-              creator: req.userData.userId,
-            });
-
-            const AlreadyInCart = (item, currentCart) => {
-              // because we don't want to add the same item twice?
-              for (let i = 0; i < currentCart.length; i++) {
-                if (currentCart[i].productId === item.productId) {
-                  return true;
-                }
-              }
-              return false;
-            };
-            const cartQuery = AlreadyInCart(cartItem, currentCart);
-            if (cartQuery === false) {
-              await cartItem.save();
-              currentCart = await CartItem.find({
-                creator: req.userData.userId,
-              });
-              break;
-            }
+            return storageItem;
           }
-        }
+        });
       }
+      for (let item of currentCart) {
+        await CartItem.findOneAndReplace(
+          {
+            $and: [
+              { creator: req.userData.userId }, // filter
+              { productId: item.productId }, // another filter
+            ],
+          },
+          { // replace with:
+            productId: item.productId,
+            title: item.title,
+            price: item.price,
+            description: item.description,
+            amount: item.amount,
+            imagePath: item.imagePath,
+            creator: req.userData.userId,
+          },
+          {
+            returnDocument: "after", // return updated document
+          }
+        );
+    }
     }
     return res.status(200).json({
       message: "Storage items added successfully!",
@@ -158,7 +140,6 @@ exports.editCartItem = (req, res, next) => {
 exports.deleteCartItem = (req, res, next) => {
   CartItem.deleteOne({ creator: req.userData.userId, productId: req.params.id })
     .then((deletedItem) => {
-      console.log(deletedItem);
       res.status(200).json({ message: "Item deleted successfully!" });
     })
     .catch((error) => {
