@@ -137,28 +137,26 @@ exports.editCartItem = (req, res, next) => {
     });
 };
 
-exports.deleteCartItem = (req, res, next) => {
-  CartItem.deleteOne({ creator: req.userData.userId, productId: req.params.id })
-    .then((deletedItem) => {
-      res.status(200).json({ message: "Item deleted successfully!" });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: "Deleting failed!",
-      });
+exports.deleteCartItem = async (req, res, next) => {
+  try {
+    await CartItem.deleteOne({ creator: req.userData.userId, productId: req.params.id });
+    res.status(200).json({ message: "Item deleted successfully!" });
+  } catch (err) {
+    res.status(500).json({
+      message: "Deleting failed!",
     });
+  };
 };
 
-exports.emptyCart = (req, res, next) => {
-  CartItem.deleteMany({ creator: req.userData.userId })
-    .then(() => {
-      res.status(200).json({
-        message: "Cart is now empty!",
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: "Something went wrong!",
-      });
+exports.emptyCart = async (req, res, next) => {
+  try {
+    await CartItem.deleteMany({ creator: req.userData.userId });
+    res.status(200).json({
+      message: "Cart is now empty!",
     });
+  } catch (err) {
+    res.status(500).json({
+      message: "Something went wrong!",
+    });
+  }
 };
