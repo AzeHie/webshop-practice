@@ -9,8 +9,8 @@ This project has been HUGE practice for me. There has been lot of bug fixing, er
 
 The lastest things I've done for this project are:
   1. Some for-loops replaced with built-in array methods, 
-  2. Lot of pointless code cleaned and replaced with better solutions, 
-  3. Lot of code dublications removed etc..
+  2. Lot of pointless code and code dublications cleaned and replaced with better solutions, 
+  3. Couple services integrated into each other..
 
 For now, this project looks ready for me. Of course there is some parts still missing - like accessories, gift cards, about-us pages etc. But I think it's time to move on and continue to learn new technologies (REACT & JAVA) and of course some new projects too.
 
